@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Video on Unmute</title>
+    <style>
+        video {
+            width: 640px;
+            height: 360px;
+            background-color: black;
+        }
+        #unmute-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background-color: orange;
+            color: white;
+            border: 1px solid black;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="position: relative; width: 640px; height: 360px;">
+        <video id="my-video" playsinline muted>
+            <source src="Slide 2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="unmute-btn">Unmute & Start</button>
+    </div>
+
+    <script>
+        // Grab video and button elements
+        const video = document.getElementById('my-video');
+        const unmuteBtn = document.getElementById('unmute-btn');
+
+        // Ensure video is paused on load
+        video.pause();
+
+        // Function to unmute and start the video
+        unmuteBtn.addEventListener('click', () => {
+            video.muted = false; // Unmute the video
+            video.play() // Play the video
+                .then(() => {
+                    unmuteBtn.style.display = 'none'; // Hide button after starting the video
+                })
+                .catch(error => {
+                    console.error("Error playing video:", error);
+                });
+        });
+    </script>
+
+</body>
+</html>
